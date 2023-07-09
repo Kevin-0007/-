@@ -7,7 +7,7 @@ with TelegramClient(
     api_id, 
     api_hash,
     use_ipv6=True,
-    local_addr='2404:8c80:0:1009:ce:1165:1d01:cb9c',
+    local_addr='2404:8c80:0:1009:5c:e8f4:f8c0:2d3b',
     device_model='UFO',
     system_version='UFO8',
     lang_code='zh',

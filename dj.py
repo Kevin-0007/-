@@ -3,7 +3,7 @@ import linecache
 import random,time
 import telethon
 from telethon import functions
-import smtplib
+import smtplib,os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from telethon.tl.functions.account import UpdateStatusRequest
@@ -45,12 +45,12 @@ def work(phone):#工作
     client=TelegramClient(phone, id, hash)
     client.connect()
     if not client.is_user_authorized():
-        send_email('user is die,',phone)
+        os.remove(phone)
+        #send_email('user is die,',phone)
     else:
         for i in x:
             msg=''
             try:
-                #client(UpdateStatusRequest(offline=False))
                 word=linecache.getline(word_file,random.randrange(1,4500, 1)).replace('\n','')
                 client.send_message(lis[i],word)
                 time.sleep(random.randint(33,88))

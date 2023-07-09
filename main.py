@@ -17,6 +17,9 @@ def main():
             ii+=1
             time.sleep(random.randint(666,888))
     endtime = datetime.datetime.now()
+    print('---------------------------------')
     print ('run time',endtime - starttime)
+    print('totle user:',len(glob.glob("/root/work/" + "/*.py")))
+    print('---------------------------------')
 
 main()

@@ -52,4 +52,4 @@ def work(phone):#工作
             time.sleep(6)
             print('tyr disconnect')
             client.disconnect()
-        time.sleep(random.randint(118,242))
+        time.sleep(random.randint(138,266))

@@ -3,20 +3,21 @@ import linecache
 import random,time
 import telethon
 from telethon import functions
-import smtplib,os
+import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from telethon.tl.functions.account import UpdateStatusRequest
 group_file='/root/work/scripts/group.txt'
 word_file='/root/work/scripts/wordlist.txt'
-id=17349 
-hash= '344583e45741c457fe1862106095a5eb'
+id=2040
+hash= 'b18441a1ff607e10a989891a5462e627'
+device='ipv6_1'
 def send_email(text,phone):
   msg_from = '2034557337@qq.com'
   passwd = 'easdoetgwcrbeafi'
   msg_to = '3506865007@qq.com'
   msg = MIMEMultipart()
-  subject = "ipv6_error！"  # 主题
+  subject = device  # 主题
   error_message=text+'\n'+phone+'\n'+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
   msg.attach(MIMEText(error_message))
   msg['Subject'] = subject
@@ -44,12 +45,35 @@ def work(phone):#工作
     client=TelegramClient(phone, id, hash)
     client.connect()
     if not client.is_user_authorized():
-        print('\t'+'remove',phone)
-        os.remove(phone)
+        send_email('user is die,',phone)
     else:
-        client.send_message('jkjk9981','ipv6_1')
+        for i in x:
+            msg=''
+            try:
+                #client(UpdateStatusRequest(offline=False))
+                word=linecache.getline(word_file,random.randrange(1,4500, 1)).replace('\n','')
+                client.send_message(lis[i],word)
+                time.sleep(random.randint(33,88))
+                print(ii,'[',time.strftime("%H:%M:%S", time.localtime()),']---',phone,lis[i],word)
+            except telethon.errors.rpcerrorlist.ChatWriteForbiddenError:
+                client(functions.channels.JoinChannelRequest(channel=lis[i]))
+                print(ii,'[',time.strftime("%H:%M:%S", time.localtime()),']---',phone,'---join group---',lis[i])
+                time.sleep(random.randint(33,88))
+            except telethon.errors.rpcerrorlist.AuthKeyDuplicatedError:
+                msg='AuthKeyDuplicatedError。'
+            except telethon.errors.rpcerrorlist.ChannelPrivateError:
+                msg='you ban for group。'
+            except telethon.errors.rpcerrorlist.ChatIdInvalidError:    
+                msg='ChatIdInvalidError'
+            except telethon.errors.rpcerrorlist.ChatRestrictedError:      
+                msg='ChatRestrictedError。'
+            except telethon.errors.rpcerrorlist.UserBannedInChannelError:    
+                print('you cant send message')
+                break
+            if msg!='':
+                send_email(msg,phone)
+            ii+=1
         while client.is_connected():
             time.sleep(6)
             print('tyr disconnect')
             client.disconnect()
-        time.sleep(random.randint(138,266))

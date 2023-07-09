@@ -1,7 +1,7 @@
 import glob,os
 file_path = "/root/work/session"
 xlsx_files = glob.glob(file_path + "/*.session")
-ip_list=['2404:8c80:0:1010:2b:b0d5:21b6:ff1d','2404:8c80:0:1010:41:992c:a701:7e24']
+ip_list=
 index=1
 for i in xlsx_files:
     all=len(xlsx_files)

@@ -3,7 +3,7 @@ from telethon import TelegramClient
 api_id=17349 
 api_hash='344583e45741c457fe1862106095a5eb'
 with TelegramClient(
-    '6283114514550', 
+    '6283114514545', 
     api_id, 
     api_hash,
     use_ipv6=True,

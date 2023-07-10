@@ -42,7 +42,7 @@ def work(phone,ip):#工作
     for i in range(0,len(lis)):
         x.append(i)
     random.shuffle(x)
-    client=TelegramClient(phone, id, hash,use_ipv6=True,local_addr=ip)
+    client=TelegramClient(phone,id,hash)
     client.connect()
     if not client.is_user_authorized():
         print('delete',phone)
